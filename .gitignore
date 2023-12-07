@@ -165,3 +165,7 @@ cython_debug/
 
 #Ignore DS Store
 .DS_Store
+
+# SQL Server
+*.mdf
+*.ldf
