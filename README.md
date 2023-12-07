@@ -7,3 +7,7 @@ Run the SQL files in the infrastructure_initiation folder to create the required
 ## Step 2:
 
 Update the sql_server_config.cfg file to your local information.
+
+## Step 3:
+ 
+Update the config.py files to your local information. 
