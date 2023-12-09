@@ -35,26 +35,4 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
 
-def setup_logging(log_file_path):
-    """
-    Set up the logging configuration.
-
-    Parameters
-    ----------
-    log_file_path : str, optional
-        The path to the log file.
-    """
-    # Create a logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-
-    # Create a FileHandler and set the level to DEBUG
-    file_handler = logging.FileHandler(log_file_path)
-    file_handler.setLevel(logging.DEBUG)
-
-    # Set the formatter for the FileHandler
-    file_handler.setFormatter(CustomFormatter())
-
-    # Add the FileHandler to the logger
-    logger.addHandler(file_handler)
 
