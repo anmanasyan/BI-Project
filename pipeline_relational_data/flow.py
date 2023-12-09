@@ -1,10 +1,22 @@
 from pipeline_relational_data import tasks 
 import utils
-import logger
+
+from logger import CustomFormatter
 import logging
 
-logger.setup_logging(log_file_path='C:\\Users\\Anna\\Desktop\\BI\\Group_Project_2\\logs\\logs_relational_data_pipeline.txt')
+#setting up logging
+log_file_path='C:\\Users\\Anna\\Desktop\\BI\\Group_Project_2\\logs\\logs_relational_data_pipeline.txt'
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Create a FileHandler and set the level to DEBUG
+file_handler = logging.FileHandler(log_file_path)
+file_handler.setLevel(logging.DEBUG)
+
+# Set the formatter for the FileHandler
+file_handler.setFormatter(CustomFormatter())
+# Add the FileHandler to the logger
+logger.addHandler(file_handler)
 
 class RelationalDataFlow:
     def __init__(self):
