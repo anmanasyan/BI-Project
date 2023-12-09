@@ -1,5 +1,5 @@
 -- Create Table: Orders
-CREATE TABLE Orders (
+CREATE TABLE {db}.{schema}.Orders (
     OrderID INT PRIMARY KEY,
     CustomerID VARCHAR(5),
     EmployeeID INT,

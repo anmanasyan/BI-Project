@@ -1,5 +1,5 @@
 -- Create Table: Employees
-CREATE TABLE Employees (
+CREATE TABLE {db}.{schema}.Employees (
     EmployeeID INT PRIMARY KEY,
     LastName VARCHAR(255) NOT NULL,
     FirstName VARCHAR(255) NOT NULL,

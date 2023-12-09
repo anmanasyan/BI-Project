@@ -1,5 +1,5 @@
 -- Create Table: Products
-CREATE TABLE Products (
+CREATE TABLE {db}.{schema}.Products (
     ProductID INT PRIMARY KEY,
     ProductName VARCHAR(255) NOT NULL,
     SupplierID INT,

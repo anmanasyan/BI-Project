@@ -1,5 +1,5 @@
 -- Create Table: Customers
-CREATE TABLE Customers (
+CREATE TABLE {db}.{schema}.Customers (
     CustomerID VARCHAR(5) PRIMARY KEY,
     CompanyName VARCHAR(255) NOT NULL,
     ContactName VARCHAR(255),

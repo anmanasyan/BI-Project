@@ -1,5 +1,5 @@
 -- Create Table: Suppliers
-CREATE TABLE Suppliers (
+CREATE TABLE {db}.{schema}.Suppliers (
     SupplierID INT PRIMARY KEY,
     CompanyName VARCHAR(255) NOT NULL,
     ContactName VARCHAR(255),

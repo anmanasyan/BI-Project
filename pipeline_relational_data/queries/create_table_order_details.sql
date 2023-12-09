@@ -1,5 +1,5 @@
 -- Create Table: OrderDetails
-CREATE TABLE OrderDetails (
+CREATE TABLE {db}.{schema}.OrderDetails (
     OrderID INT ,
     ProductID INT ,
     UnitPrice DECIMAL(20, 2) NOT NULL,
