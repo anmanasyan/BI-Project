@@ -1,6 +1,6 @@
 -- Create Table: Orders
 CREATE TABLE {db}.{schema}.Fact_Orders (
-    OrderID_SK_PK INT IDENTITY(1, 1) PRIMARY KEY
+    OrderID_SK_PK INT IDENTITY(1, 1) PRIMARY KEY,
     OrderID_NK INT,
     CustomerID VARCHAR(5),
     EmployeeID INT,
