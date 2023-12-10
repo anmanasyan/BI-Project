@@ -1,5 +1,9 @@
 MERGE {db_dim}.{schema_dim}.{table_dim} AS DST -- destination
-USING {db_rel}.{schema_rel}.{table_rel} AS SRC -- source
+USING (SELECT p.*, b.SupplierID_PK_SK, c.CategoryID_PK_SK FROM
+		 {db_rel}.{schema_rel}.{table_rel} p
+		 LEFT JOIN {db_dim}.{schema_dim}.dim_suppliers_scd3 b ON p.SupplierID = b.SupplierID_NK
+		 LEFT JOIN {db_dim}.{schema_dim}.dim_categories_scd1 c on p.CategoryID = c.CategoryID_NK
+		 ) AS SRC -- source
 ON ( SRC.ProductID = DST.ProductID_NK )
 WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
   INSERT (ProductID_NK,
@@ -14,8 +18,8 @@ WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the d
           Discontinued)
   VALUES (SRC.ProductID,
           SRC.ProductName,
-          SRC.SupplierID,
-          SRC.CategoryID,
+          SRC.SupplierID_PK_SK,
+          SRC.CategoryID_PK_SK,
           SRC.QuantityPerUnit,
           SRC.UnitPrice,
           SRC.UnitsInStock,
@@ -24,8 +28,8 @@ WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the d
           SRC.Discontinued)
 WHEN MATCHED AND  (
   Isnull(DST.ProductName, '') <> Isnull(SRC.ProductName, '')  OR
-  Isnull(DST.SupplierID, '') <> Isnull(SRC.SupplierID, '')  OR
-  Isnull(DST.CategoryID, '') <> Isnull(SRC.CategoryID, '')  OR
+  Isnull(DST.SupplierID, '') <> Isnull(SRC.SupplierID_PK_SK, '')  OR
+  Isnull(DST.CategoryID, '') <> Isnull(SRC.CategoryID_PK_SK, '')  OR
   Isnull(DST.QuantityPerUnit, '') <> Isnull(SRC.QuantityPerUnit, '')  OR
   Isnull(DST.UnitPrice, '') <> Isnull(SRC.UnitPrice, '')  OR
   Isnull(DST.UnitsInStock, '') <> Isnull(SRC.UnitsInStock, '')  OR
@@ -34,8 +38,8 @@ WHEN MATCHED AND  (
   Isnull(DST.Discontinued, '') <> Isnull(SRC.Discontinued, ''))
 	THEN
 		UPDATE SET DST.ProductName = SRC.ProductName,
-             DST.SupplierID = SRC.SupplierID,
-             DST.CategoryID = SRC.CategoryID,
+             DST.SupplierID = SRC.SupplierID_PK_SK,
+             DST.CategoryID = SRC.CategoryID_PK_SK,
              DST.QuantityPerUnit = SRC.QuantityPerUnit,
              DST.UnitPrice = SRC.UnitPrice,
              DST.UnitsInStock = SRC.UnitsInStock,
