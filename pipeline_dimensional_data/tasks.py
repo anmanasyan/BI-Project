@@ -40,7 +40,7 @@ def load_query(query_name):
                 sql_script = script_file.read()
             break
 
-    logger.info("Loaded SQL Script:", sql_script) 
+    #logger.info("Loaded SQL Script: %s", sql_script) 
     return sql_script
 
 
@@ -82,9 +82,16 @@ def update_dim_table(cursor, table_dst, db_dst, schema_dst, table_src, db_src, s
     update_table_script = load_query('update_table_{}'.format(table_dst)).format(
         db_dim=db_dst, schema_dim=schema_dst, table_dim=table_dst,
         db_rel=db_src, schema_rel=schema_src, table_rel=table_src)
-
     # Execute the query
     cursor.execute(update_table_script)
+
+    # Fetch the results (both deleted and inserted rows)
+    result = cursor.fetchall()
+
+    # Log the results
+    for row in result:
+        logger.info("Changed Row: %s", row)
+    
     cursor.commit()
 
     logger.info(f"The dimension table {table_dst} has been updated.")
