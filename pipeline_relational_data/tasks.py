@@ -74,6 +74,7 @@ def insert_into_table(cursor, table_name, db, schema, source_data, sheet_name):
         values = [row[col] if pd.notna(row[col]) else None for col in df.columns]
         cursor.execute(insert_into_table_script, *values)
         cursor.commit()
+       #logger.info(f"Inserted Value: {values}")
 
     logger.info(f"{len(df)} rows have been inserted into the {db}.{schema}.{table_name} table")
 

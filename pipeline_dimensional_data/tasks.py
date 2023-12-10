@@ -95,3 +95,21 @@ def update_dim_table(cursor, table_dst, db_dst, schema_dst, table_src, db_src, s
     cursor.commit()
 
     logger.info(f"The dimension table {table_dst} has been updated.")
+
+def update_dim_table_scd4(cursor, table_dst, table_hist, db_dst, schema_dst, table_src, db_src, schema_src):
+    table_dim_scd4 = table_dst[:-1] + '4'
+    update_table_script = load_query('update_table_{}'.format(table_dim_scd4)).format(
+        db_dim=db_dst, schema_dim=schema_dst, table_dim=table_dst, table_hist = table_hist,
+        db_rel=db_src, schema_rel=schema_src, table_rel=table_src)
+    # Execute the query
+    cursor.execute(update_table_script)
+
+    # Fetch the results (both deleted and inserted rows)
+    result = cursor.fetchall()
+
+    # Log the results
+    for row in result:
+        logger.info("Changed Row: %s", row)
+    
+    cursor.commit()
+    logger.info(f"The dimension tables {table_dst} and {table_hist}  have been updated.")

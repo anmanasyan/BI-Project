@@ -21,3 +21,4 @@
 [38;5;183m2023-12-09 15:11:45,437 - pipeline_relational_data.tasks - insert_into_table - INFO - (2155 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.order_details table) - line: 78[0m
 [38;5;183m2023-12-09 15:11:45,624 - pipeline_relational_data.tasks - establish_referential_integrity - INFO - (Referential integrity constraints have been established.) - line: 64[0m
 [38;5;183m2023-12-09 15:11:45,625 - pipeline_relational_data.flow - exec - INFO - (Relational Flow Completed Successfully) - line: 72[0m
+[38;5;183m2023-12-10 16:56:28,355 - pipeline_relational_data.flow - __init__ - INFO - (RelationalDataFlow instance created with UUID: 9fd2362c-dff0-40a6-a624-fdf6b3060066) - line: 24[0m

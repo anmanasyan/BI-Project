@@ -6,3 +6,654 @@
 [38;5;183m2023-12-09 20:28:14,122 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: ff0f85db-269b-49b8-bc0f-358f87b1f11f) - line: 24[0m
 [38;5;183m2023-12-09 20:28:27,824 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: c28d9a95-f169-410a-b560-9de152c86bc5) - line: 24[0m
 [38;5;183m2023-12-09 20:28:27,886 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 62[0m
+[38;5;183m2023-12-10 16:37:42,982 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 9d644118-04e3-4efd-9401-7167c4020ca3) - line: 24[0m
+[38;5;183m2023-12-10 16:39:01,247 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 6fb52e2f-ead6-4870-a216-2b605b6f0c5e) - line: 24[0m
+[38;5;183m2023-12-10 16:39:26,402 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: cd02963c-a084-499e-9377-d4bef99548eb) - line: 24[0m
+[38;5;183m2023-12-10 16:40:27,386 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 64308e18-7df7-4051-980c-0c9b722c7cd2) - line: 24[0m
+[38;5;183m2023-12-10 16:43:33,188 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 092bb562-5d69-4def-8f05-ef34295fc2ca) - line: 24[0m
+[38;5;183m2023-12-10 16:45:41,203 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: bd9a4cf2-dba9-4880-8ae2-9d69f23094ec) - line: 24[0m
+[38;5;183m2023-12-10 16:45:41,630 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: ) - line: 43[0m
+[38;5;183m2023-12-10 16:47:57,253 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 9b1599f7-eb2a-40b7-bb05-9939bcb0c55c) - line: 24[0m
+[38;5;183m2023-12-10 16:47:57,583 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: ) - line: 43[0m
+[38;5;183m2023-12-10 16:50:59,324 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 5a19359f-7c06-4657-a214-279592f4ac0d) - line: 24[0m
+[38;5;183m2023-12-10 16:50:59,771 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: ) - line: 43[0m
+[38;5;183m2023-12-10 16:52:06,801 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: c5e49a82-5a4e-402a-90eb-47e4fc7c3ad9) - line: 24[0m
+[38;5;183m2023-12-10 16:52:06,955 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: ) - line: 43[0m
+[38;5;183m2023-12-10 16:52:06,955 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Update Table Script: ) - line: 85[0m
+[38;5;183m2023-12-10 16:52:31,567 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 53a40aba-20b8-4774-9195-8c73d6242912) - line: 24[0m
+[38;5;183m2023-12-10 16:52:31,695 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: ) - line: 43[0m
+[38;5;183m2023-12-10 16:52:31,695 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Update Table Script: ) - line: 85[0m
+[38;5;183m2023-12-10 16:56:28,355 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 0fe17a1f-be47-472a-8c27-9d0e0ab6b69c) - line: 24[0m
+[38;5;183m2023-12-10 16:56:28,661 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: MERGE {db_dim}.{schema_dim}.{table_dim} AS DST -- destination
+USING {db_rel}.{schema_rel}.{table_rel} AS SRC -- source
+ON ( SRC.CategoryID = DST.CategoryID_NK )
+WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
+  INSERT (CategoryID_NK,
+          CategoryName,
+          [Description])
+  VALUES (SRC.CategoryID,
+          SRC.CategoryName,
+          SRC.[Description])
+WHEN MATCHED AND  (
+  Isnull(DST.CategoryName, '') <> Isnull(SRC.CategoryName, '')  OR
+  Isnull(DST.[Description], '') <> Isnull(SRC.[Description], ''))
+	THEN
+		UPDATE SET DST.CategoryName = SRC.CategoryName,
+             DST.[Description] = SRC.[Description]; ) - line: 43[0m
+[38;5;183m2023-12-10 16:56:28,661 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Update Table Script: MERGE ORDERS_DIMENSIONAL_DB.dbo.dim_categories_scd1 AS DST -- destination
+USING ORDERS_RELATIONAL_DB.dbo.Categories AS SRC -- source
+ON ( SRC.CategoryID = DST.CategoryID_NK )
+WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
+  INSERT (CategoryID_NK,
+          CategoryName,
+          [Description])
+  VALUES (SRC.CategoryID,
+          SRC.CategoryName,
+          SRC.[Description])
+WHEN MATCHED AND  (
+  Isnull(DST.CategoryName, '') <> Isnull(SRC.CategoryName, '')  OR
+  Isnull(DST.[Description], '') <> Isnull(SRC.[Description], ''))
+	THEN
+		UPDATE SET DST.CategoryName = SRC.CategoryName,
+             DST.[Description] = SRC.[Description]; ) - line: 85[0m
+[38;5;183m2023-12-10 16:56:28,736 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 90[0m
+[38;5;183m2023-12-10 16:56:28,736 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 64[0m
+[38;5;183m2023-12-10 17:35:48,660 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: ff3dcb83-3c5f-4261-b387-9d47a303d9fa) - line: 24[0m
+[38;5;183m2023-12-10 17:35:49,154 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: MERGE {db_dim}.{schema_dim}.{table_dim} AS DST -- destination
+USING {db_rel}.{schema_rel}.{table_rel} AS SRC -- source
+ON ( SRC.CategoryID = DST.CategoryID_NK )
+WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
+  INSERT (CategoryID_NK,
+          CategoryName,
+          [Description])
+  VALUES (SRC.CategoryID,
+          SRC.CategoryName,
+          SRC.[Description])
+WHEN MATCHED AND  (
+  Isnull(DST.CategoryName, '') <> Isnull(SRC.CategoryName, '')  OR
+  Isnull(DST.[Description], '') <> Isnull(SRC.[Description], ''))
+	THEN
+		UPDATE SET DST.CategoryName = SRC.CategoryName,
+             DST.[Description] = SRC.[Description]; ) - line: 43[0m
+[38;5;183m2023-12-10 17:37:59,190 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 8fe202c5-b2d1-4815-906d-751ab9a060cf) - line: 24[0m
+[38;5;183m2023-12-10 17:37:59,480 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: MERGE {db_dim}.{schema_dim}.{table_dim} AS DST -- destination
+USING {db_rel}.{schema_rel}.{table_rel} AS SRC -- source
+ON ( SRC.ProductID = DST.ProductID_NK )
+WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
+  INSERT (ProductID_NK,
+          ProductName,
+          SupplierID,
+          CategoryID,
+          QuantityPerUnit,
+          UnitPrice,
+          UnitsInStock,
+          UnitsOnOrder,
+          ReorderLevel,
+          Discontinued)
+  VALUES (SRC.ProductID,
+          SRC.ProductName,
+          SRC.SupplierID,
+          SRC.CategoryID,
+          SRC.QuantityPerUnit,
+          SRC.UnitPrice,
+          SRC.UnitsInStock,
+          SRC.UnitsOnOrder,
+          SRC.ReorderLevel,
+          SRC.Discontinued)
+WHEN MATCHED AND  (
+  Isnull(DST.ProductName, '') <> Isnull(SRC.ProductName, '')  OR
+  Isnull(DST.SupplierID, '') <> Isnull(SRC.SupplierID, '')  OR
+  Isnull(DST.CategoryID, '') <> Isnull(SRC.CategoryID, '')  OR
+  Isnull(DST.QuantityPerUnit, '') <> Isnull(SRC.QuantityPerUnit, '')  OR
+  Isnull(DST.UnitPrice, '') <> Isnull(SRC.UnitPrice, '')  OR
+  Isnull(DST.UnitsInStock, '') <> Isnull(SRC.UnitsInStock, '')  OR
+  Isnull(DST.UnitsOnOrder, '') <> Isnull(SRC.UnitsOnOrder, '')  OR
+  Isnull(DST.ReorderLevel, '') <> Isnull(SRC.ReorderLevel, '')  OR
+  Isnull(DST.Discontinued, '') <> Isnull(SRC.Discontinued, ''))
+	THEN
+		UPDATE SET DST.ProductName = SRC.ProductName,
+             DST.SupplierID = SRC.SupplierID,
+             DST.CategoryID = SRC.CategoryID,
+             DST.QuantityPerUnit = SRC.QuantityPerUnit,
+             DST.UnitPrice = SRC.UnitPrice,
+             DST.UnitsInStock = SRC.UnitsInStock,
+             DST.UnitsOnOrder = SRC.UnitsOnOrder,
+             DST.ReorderLevel = SRC.ReorderLevel,
+             DST.Discontinued = SRC.Discontinued
+
+OUTPUT $action, 
+DELETED.ProductID_NK AS TargetProductID, 
+DELETED.ProductName AS TargetProductName, 
+DELETED.SupplierID AS TargetSupplierID, 
+DELETED.CategoryID AS TargetCategoryID, 
+DELETED.QuantityPerUnit AS TargetQuantityPerUnit, 
+DELETED.UnitPrice AS TargetUnitPrice, 
+DELETED.UnitsInStock AS TargetUnitsInStock, 
+DELETED.UnitsOnOrder AS TargetUnitsOnOrder,
+DELETED.ReorderLevel AS TargetReorderLevel, 
+DELETED.Discontinued AS TargetDiscontinued
+INSERTED.ProductID_NK AS SourceProductID, 
+INSERTED.ProductName AS SourceProductName, 
+INSERTED.SupplierID AS SourceSupplierID, 
+INSERTED.CategoryID AS SourceCategoryID, 
+INSERTED.QuantityPerUnit AS SourceQuantityPerUnit, 
+INSERTED.UnitPrice AS SourceUnitPrice, 
+INSERTED.UnitsInStock AS SourceUnitsInStock, 
+INSERTED.UnitsOnOrder AS SourceUnitsOnOrder,
+INSERTED.ReorderLevel AS SourceReorderLevel, 
+INSERTED.Discontinued AS TargetDiscontinued; 
+
+SELECT @@ROWCOUNT;) - line: 43[0m
+[38;5;183m2023-12-10 17:38:26,260 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: ad36086f-7d19-4e8b-880e-5d9e0aa06f93) - line: 24[0m
+[38;5;183m2023-12-10 17:38:26,400 - pipeline_dimensional_data.tasks - load_query - INFO - (Loaded SQL Script: MERGE {db_dim}.{schema_dim}.{table_dim} AS DST -- destination
+USING {db_rel}.{schema_rel}.{table_rel} AS SRC -- source
+ON ( SRC.ProductID = DST.ProductID_NK )
+WHEN NOT MATCHED THEN -- there are IDs in the source table that are not in the destination table
+  INSERT (ProductID_NK,
+          ProductName,
+          SupplierID,
+          CategoryID,
+          QuantityPerUnit,
+          UnitPrice,
+          UnitsInStock,
+          UnitsOnOrder,
+          ReorderLevel,
+          Discontinued)
+  VALUES (SRC.ProductID,
+          SRC.ProductName,
+          SRC.SupplierID,
+          SRC.CategoryID,
+          SRC.QuantityPerUnit,
+          SRC.UnitPrice,
+          SRC.UnitsInStock,
+          SRC.UnitsOnOrder,
+          SRC.ReorderLevel,
+          SRC.Discontinued)
+WHEN MATCHED AND  (
+  Isnull(DST.ProductName, '') <> Isnull(SRC.ProductName, '')  OR
+  Isnull(DST.SupplierID, '') <> Isnull(SRC.SupplierID, '')  OR
+  Isnull(DST.CategoryID, '') <> Isnull(SRC.CategoryID, '')  OR
+  Isnull(DST.QuantityPerUnit, '') <> Isnull(SRC.QuantityPerUnit, '')  OR
+  Isnull(DST.UnitPrice, '') <> Isnull(SRC.UnitPrice, '')  OR
+  Isnull(DST.UnitsInStock, '') <> Isnull(SRC.UnitsInStock, '')  OR
+  Isnull(DST.UnitsOnOrder, '') <> Isnull(SRC.UnitsOnOrder, '')  OR
+  Isnull(DST.ReorderLevel, '') <> Isnull(SRC.ReorderLevel, '')  OR
+  Isnull(DST.Discontinued, '') <> Isnull(SRC.Discontinued, ''))
+	THEN
+		UPDATE SET DST.ProductName = SRC.ProductName,
+             DST.SupplierID = SRC.SupplierID,
+             DST.CategoryID = SRC.CategoryID,
+             DST.QuantityPerUnit = SRC.QuantityPerUnit,
+             DST.UnitPrice = SRC.UnitPrice,
+             DST.UnitsInStock = SRC.UnitsInStock,
+             DST.UnitsOnOrder = SRC.UnitsOnOrder,
+             DST.ReorderLevel = SRC.ReorderLevel,
+             DST.Discontinued = SRC.Discontinued
+
+OUTPUT $action, 
+DELETED.ProductID_NK AS TargetProductID, 
+DELETED.ProductName AS TargetProductName, 
+DELETED.SupplierID AS TargetSupplierID, 
+DELETED.CategoryID AS TargetCategoryID, 
+DELETED.QuantityPerUnit AS TargetQuantityPerUnit, 
+DELETED.UnitPrice AS TargetUnitPrice, 
+DELETED.UnitsInStock AS TargetUnitsInStock, 
+DELETED.UnitsOnOrder AS TargetUnitsOnOrder,
+DELETED.ReorderLevel AS TargetReorderLevel, 
+DELETED.Discontinued AS TargetDiscontinued,
+INSERTED.ProductID_NK AS SourceProductID, 
+INSERTED.ProductName AS SourceProductName, 
+INSERTED.SupplierID AS SourceSupplierID, 
+INSERTED.CategoryID AS SourceCategoryID, 
+INSERTED.QuantityPerUnit AS SourceQuantityPerUnit, 
+INSERTED.UnitPrice AS SourceUnitPrice, 
+INSERTED.UnitsInStock AS SourceUnitsInStock, 
+INSERTED.UnitsOnOrder AS SourceUnitsOnOrder,
+INSERTED.ReorderLevel AS SourceReorderLevel, 
+INSERTED.Discontinued AS TargetDiscontinued; 
+
+SELECT @@ROWCOUNT;) - line: 43[0m
+[38;5;183m2023-12-10 17:38:26,538 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 1, 'Chai', 1, 1, '10 boxes x 20 bags', Decimal('18.00'), 39, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,539 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 2, 'Chang', 1, 1, '24 - 12 oz bottles', Decimal('19.00'), 17, 40, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,539 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', Decimal('10.00'), 13, 70, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,539 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 4, "Chef Anton's Cajun Seasoning", 2, 2, '48 - 6 oz jars', Decimal('22.00'), 53, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,540 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 5, "Chef Anton's Gumbo Mix", 2, 2, '36 boxes', Decimal('21.35'), 0, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,540 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 6, "Grandma's Boysenberry Spread", 3, 2, '12 - 8 oz jars', Decimal('25.00'), 120, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,540 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 7, "Uncle Bob's Organic Dried Pears", 3, 7, '12 - 1 lb pkgs.', Decimal('30.00'), 15, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,540 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars', Decimal('40.00'), 6, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,541 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.', Decimal('97.00'), 29, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,541 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 10, 'Ikura', 4, 8, '12 - 200 ml jars', Decimal('31.00'), 31, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,541 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 11, 'Queso Cabrales', 5, 4, '1 kg pkg.', Decimal('21.00'), 22, 30, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,541 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.', Decimal('38.00'), 86, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,542 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 13, 'Konbu', 6, 8, '2 kg box', Decimal('6.00'), 24, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,542 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 14, 'Tofu', 6, 7, '40 - 100 g pkgs.', Decimal('23.25'), 35, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,543 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 15, 'Genen Shouyu', 6, 2, '24 - 250 ml bottles', Decimal('15.50'), 39, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,543 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 16, 'Pavlova', 7, 3, '32 - 500 g boxes', Decimal('17.45'), 29, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,543 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 17, 'Alice Mutton', 7, 6, '20 - 1 kg tins', Decimal('39.00'), 0, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,544 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 18, 'Carnarvon Tigers', 7, 8, '16 kg pkg.', Decimal('62.50'), 42, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,544 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 19, 'Teatime Chocolate Biscuits', 8, 3, '10 boxes x 12 pieces', Decimal('9.20'), 25, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,544 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 20, "Sir Rodney's Marmalade", 8, 3, '30 gift boxes', Decimal('81.00'), 40, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,545 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 21, "Sir Rodney's Scones", 8, 3, '24 pkgs. x 4 pieces', Decimal('10.00'), 3, 40, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,545 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 22, "Gustaf's Knäckebröd", 9, 5, '24 - 500 g pkgs.', Decimal('21.00'), 104, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,547 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 23, 'Tunnbröd', 9, 5, '12 - 250 g pkgs.', Decimal('9.00'), 61, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,547 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 24, 'Guaraná Fantástica', 10, 1, '12 - 355 ml cans', Decimal('4.50'), 20, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,548 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 25, 'NuNuCa Nuß-Nougat-Creme', 11, 3, '20 - 450 g glasses', Decimal('14.00'), 76, 0, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,548 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 26, 'Gumbär Gummibärchen', 11, 3, '100 - 250 g bags', Decimal('31.23'), 15, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,549 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 27, 'Schoggi Schokolade', 11, 3, '100 - 100 g pieces', Decimal('43.90'), 49, 0, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,549 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 28, 'Rössle Sauerkraut', 12, 7, '25 - 825 g cans', Decimal('45.60'), 26, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,549 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 29, 'Thüringer Rostbratwurst', 12, 6, '50 bags x 30 sausgs.', Decimal('123.79'), 0, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,551 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 30, 'Nord-Ost Matjeshering', 13, 8, '10 - 200 g glasses', Decimal('25.89'), 10, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,551 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 31, 'Gorgonzola Telino', 14, 4, '12 - 100 g pkgs', Decimal('12.50'), 0, 70, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,551 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 32, 'Mascarpone Fabioli', 14, 4, '24 - 200 g pkgs.', Decimal('32.00'), 9, 40, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,552 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 33, 'Geitost', 15, 4, '500 g', Decimal('2.50'), 112, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,552 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 34, 'Sasquatch Ale', 16, 1, '24 - 12 oz bottles', Decimal('14.00'), 111, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,552 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 35, 'Steeleye Stout', 16, 1, '24 - 12 oz bottles', Decimal('18.00'), 20, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,553 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 36, 'Inlagd Sill', 17, 8, '24 - 250 g  jars', Decimal('19.00'), 112, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,553 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 37, 'Gravad lax', 17, 8, '12 - 500 g pkgs.', Decimal('26.00'), 11, 50, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,553 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 38, 'Côte de Blaye', 18, 1, '12 - 75 cl bottles', Decimal('263.50'), 17, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,554 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 39, 'Chartreuse verte', 18, 1, '750 cc per bottle', Decimal('18.00'), 69, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,554 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 40, 'Boston Crab Meat', 19, 8, '24 - 4 oz tins', Decimal('18.40'), 123, 0, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,555 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 41, "Jack's New England Clam Chowder", 19, 8, '12 - 12 oz cans', Decimal('9.65'), 85, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,555 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 42, 'Singaporean Hokkien Fried Mee', 20, 5, '32 - 1 kg pkgs.', Decimal('14.00'), 26, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,555 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 43, 'Ipoh Coffee', 20, 1, '16 - 500 g tins', Decimal('46.00'), 17, 10, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,555 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 44, 'Gula Malacca', 20, 2, '20 - 2 kg bags', Decimal('19.45'), 27, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,556 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 45, 'Rogede sild', 21, 8, '1k pkg.', Decimal('9.50'), 5, 70, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,556 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 46, 'Spegesild', 21, 8, '4 - 450 g glasses', Decimal('12.00'), 95, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,556 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 47, 'Zaanse koeken', 22, 3, '10 - 4 oz boxes', Decimal('9.50'), 36, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,557 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 48, 'Chocolade', 22, 3, '10 pkgs.', Decimal('12.75'), 15, 70, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,557 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 49, 'Maxilaku', 23, 3, '24 - 50 g pkgs.', Decimal('20.00'), 10, 60, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,557 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 50, 'Valkoinen suklaa', 23, 3, '12 - 100 g bars', Decimal('16.25'), 65, 0, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,557 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 51, 'Manjimup Dried Apples', 24, 7, '50 - 300 g pkgs.', Decimal('53.00'), 20, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,557 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 52, 'Filo Mix', 24, 5, '16 - 2 kg boxes', Decimal('7.00'), 38, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,558 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 53, 'Perth Pasties', 24, 6, '48 pieces', Decimal('32.80'), 0, 0, 0, True)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,558 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 54, 'Tourtière', 25, 6, '16 pies', Decimal('7.45'), 21, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,558 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 55, 'Pâté chinois', 25, 6, '24 boxes x 2 pies', Decimal('24.00'), 115, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,558 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 56, 'Gnocchi di nonna Alice', 26, 5, '24 - 250 g pkgs.', Decimal('38.00'), 21, 10, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,559 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 57, 'Ravioli Angelo', 26, 5, '24 - 250 g pkgs.', Decimal('19.50'), 36, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,559 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 58, 'Escargots de Bourgogne', 27, 8, '24 pieces', Decimal('13.25'), 62, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,559 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 59, 'Raclette Courdavault', 28, 4, '5 kg pkg.', Decimal('55.00'), 79, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,559 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 60, 'Camembert Pierrot', 28, 4, '15 - 300 g rounds', Decimal('34.00'), 19, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,559 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 61, "Sirop d'érable", 29, 2, '24 - 500 ml bottles', Decimal('28.50'), 113, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,561 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 62, 'Tarte au sucre', 29, 3, '48 pies', Decimal('49.30'), 17, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,561 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 63, 'Vegie-spread', 7, 2, '15 - 625 g jars', Decimal('43.90'), 24, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,561 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 64, 'Wimmers gute Semmelknödel', 12, 5, '20 bags x 4 pieces', Decimal('33.25'), 22, 80, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,561 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 65, 'Louisiana Fiery Hot Pepper Sauce', 2, 2, '32 - 8 oz bottles', Decimal('21.05'), 76, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,562 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 66, 'Louisiana Hot Spiced Okra', 2, 2, '24 - 8 oz jars', Decimal('17.00'), 4, 100, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,562 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 67, 'Laughing Lumberjack Lager', 16, 1, '24 - 12 oz bottles', Decimal('14.00'), 52, 0, 10, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,562 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 68, 'Scottish Longbreads', 8, 3, '10 boxes x 8 pieces', Decimal('12.50'), 6, 10, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,563 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 69, 'Gudbrandsdalsost', 15, 4, '10 kg pkg.', Decimal('36.00'), 26, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,563 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 70, 'Outback Lager', 7, 1, '24 - 355 ml bottles', Decimal('15.00'), 15, 10, 30, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,563 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 71, 'Flotemysost', 15, 4, '10 - 500 g pkgs.', Decimal('21.50'), 26, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,564 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 72, 'Mozzarella di Giovanni', 14, 4, '24 - 200 g pkgs.', Decimal('34.80'), 14, 0, 0, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,564 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 73, 'Röd Kaviar', 17, 8, '24 - 150 g jars', Decimal('15.00'), 101, 0, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,564 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 74, 'Longlife Tofu', 4, 7, '5 kg pkg.', Decimal('10.00'), 4, 20, 5, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,565 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 75, 'Rhönbräu Klosterbier', 12, 1, '24 - 0.5 l bottles', Decimal('7.75'), 125, 0, 25, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,565 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 76, 'Lakkalikööri', 23, 1, '500 ml', Decimal('18.00'), 57, 0, 20, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,565 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, 77, 'Original Frankfurter grüne Soße', 12, 2, '12 boxes', Decimal('13.00'), 32, 0, 15, False)) - line: 93[0m
+[38;5;183m2023-12-10 17:38:26,567 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 17:38:26,569 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 65[0m
+[38;5;183m2023-12-10 18:39:13,300 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 2404a565-c882-4e9f-9d5b-70121a3e0c41) - line: 24[0m
+[38;5;183m2023-12-10 18:39:13,639 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 18:39:13,749 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 1, 'Exotic Liquids', 'Charlotte Cooper', 'Purchasing Manager', None, None, '49 Gilbert St.', 'London', None, 'EC1 4SD', 'UK', '(171) 555-2222', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,749 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 2, 'New Orleans Cajun Delights', 'Shelley Burke', 'Order Administrator', None, None, 'P.O. Box 78934', 'New Orleans', 'LA', '70117', 'USA', '(100) 555-4822', None, '#CAJUN.HTM#')) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,750 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 3, "Grandma Kelly's Homestead", 'Regina Murphy', 'Sales Representative', None, None, '707 Oxford Rd.', 'Ann Arbor', 'MI', '48104', 'USA', '(313) 555-5735', '(313) 555-3349', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,750 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 4, 'Tokyo Traders', 'Yoshi Nagase', 'Marketing Manager', None, None, '9-8 Sekimai Musashino-shi', 'Tokyo', None, '100', 'Japan', '(03) 3555-5011', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,750 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 5, "Cooperativa de Quesos 'Las Cabras'", 'Antonio del Valle Saavedra', 'Export Administrator', None, None, 'Calle del Rosal 4', 'Oviedo', 'Asturias', '33007', 'Spain', '(98) 598 76 54', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 6, "Mayumi's", 'Mayumi Ohno', 'Marketing Representative', None, None, '92 Setsuko Chuo-ku', 'Osaka', None, '545', 'Japan', '(06) 431-7877', None, "Mayumi's (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/mayumi.htm#")) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 7, 'Pavlova, Ltd.', 'Ian Devling', 'Marketing Manager', None, None, '74 Rose St. Moonie Ponds', 'Melbourne', 'Victoria', '3058', 'Australia', '(03) 444-2343', '(03) 444-6588', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 8, 'Specialty Biscuits, Ltd.', 'Peter Wilson', 'Sales Representative', None, None, "29 King's Way", 'Manchester', None, 'M14 GSD', 'UK', '(161) 555-4448', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 9, 'PB Knäckebröd AB', 'Lars Peterson', 'Sales Agent', None, None, 'Kaloadagatan 13', 'Göteborg', None, 'S-345 67', 'Sweden', '031-987 65 43', '031-987 65 91', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 10, 'Refrescos Americanas LTDA', 'Carlos Diaz', 'Marketing Manager', None, None, 'Av. das Americanas 12.890', 'Sao Paulo', None, '5442', 'Brazil', '(11) 555 4640', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 11, 'Heli Süßwaren GmbH & Co. KG', 'Petra Winkler', 'Sales Manager', None, None, 'Tiergartenstraße 5', 'Berlin', None, '10785', 'Germany', '(010) 9984510', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,751 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 12, 'Plutzer Lebensmittelgroßmärkte AG', 'Martin Bein', 'International Marketing Mgr.', None, None, 'Bogenallee 51', 'Frankfurt', None, '60439', 'Germany', '(069) 992755', None, 'Plutzer (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/plutzer.htm#')) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 13, 'Nord-Ost-Fisch Handelsgesellschaft mbH', 'Sven Petersen', 'Coordinator Foreign Markets', None, None, 'Frahmredder 112a', 'Cuxhaven', None, '27478', 'Germany', '(04721) 8713', '(04721) 8714', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 14, 'Formaggi Fortini s.r.l.', 'Elio Rossi', 'Sales Representative', None, None, 'Viale Dante, 75', 'Ravenna', None, '48100', 'Italy', '(0544) 60323', '(0544) 60603', '#FORMAGGI.HTM#')) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 15, 'Norske Meierier', 'Beate Vileid', 'Marketing Manager', None, None, 'Hatlevegen 5', 'Sandvika', None, '1320', 'Norway', '(0)2-953010', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 16, 'Bigfoot Breweries', 'Cheryl Saylor', 'Regional Account Rep.', None, None, '3400 - 8th Avenue Suite 210', 'Bend', 'OR', '97101', 'USA', '(503) 555-9931', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 17, 'Svensk Sjöföda AB', 'Michael Björn', 'Sales Representative', None, None, 'Brovallavägen 231', 'Stockholm', None, 'S-123 45', 'Sweden', '08-123 45 67', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 18, 'Aux joyeux ecclésiastiques', 'Guylène Nodier', 'Sales Manager', None, None, '203, Rue des Francs-Bourgeois', 'Paris', None, '75004', 'France', '(1) 03.83.00.68', '(1) 03.83.00.62', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 19, 'New England Seafood Cannery', 'Robb Merchant', 'Wholesale Account Agent', None, None, 'Order Processing Dept. 2100 Paul Revere Blvd.', 'Boston', 'MA', '02134', 'USA', '(617) 555-3267', '(617) 555-3389', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,752 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 20, 'Leka Trading', 'Chandra Leka', 'Owner', None, None, '471 Serangoon Loop, Suite #402', 'Singapore', None, '0512', 'Singapore', '555-8787', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 21, 'Lyngbysild', 'Niels Petersen', 'Sales Manager', None, None, 'Lyngbysild Fiskebakken 10', 'Lyngby', None, '2800', 'Denmark', '43844108', '43844115', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 22, 'Zaanse Snoepfabriek', 'Dirk Luchte', 'Accounting Manager', None, None, 'Verkoop Rijnweg 22', 'Zaandam', None, '9999 ZZ', 'Netherlands', '(12345) 1212', '(12345) 1210', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 23, 'Karkki Oy', 'Anne Heikkonen', 'Product Manager', None, None, 'Valtakatu 12', 'Lappeenranta', None, '53120', 'Finland', '(953) 10956', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 24, "G'day, Mate", 'Wendy Mackenzie', 'Sales Representative', None, None, "170 Prince Edward Parade Hunter's Hill", 'Sydney', 'NSW', '2042', 'Australia', '(02) 555-5914', '(02) 555-4873', "G'day Mate (on the World Wide Web)#http://www.microsoft.com/accessdev/sampleapps/gdaymate.htm#")) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 25, 'Ma Maison', 'Jean-Guy Lauzon', 'Marketing Manager', None, None, '2960 Rue St. Laurent', 'Montréal', 'Québec', 'H1J 1C3', 'Canada', '(514) 555-9022', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 26, 'Pasta Buttini s.r.l.', 'Giovanni Giudici', 'Order Administrator', None, None, 'Via dei Gelsomini, 153', 'Salerno', None, '84100', 'Italy', '(089) 6547665', '(089) 6547667', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 27, 'Escargots Nouveaux', 'Marie Delamare', 'Sales Manager', None, None, '22, rue H. Voiron', 'Montceau', None, '71300', 'France', '85.57.00.07', None, None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 28, 'Gai pâturage', 'Eliane Noz', 'Sales Representative', None, None, 'Bat. B 3, rue des Alpes', 'Annecy', None, '74000', 'France', '38.76.98.06', '38.76.98.58', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,754 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, None, None, None, None, None, None, None, None, None, None, None, 29, "Forêts d'érables", 'Chantal Goulet', 'Accounting Manager', None, None, '148 rue Chasseur', 'Ste-Hyacinthe', 'Québec', 'J2S 7S8', 'Canada', '(514) 555-2955', '(514) 555-2921', None)) - line: 93[0m
+[38;5;183m2023-12-10 18:39:13,756 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 18:39:13,815 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 18:39:13,816 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 66[0m
+[38;5;183m2023-12-10 20:20:08,021 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: efa65cb9-66a4-4737-8471-1ab5c4091d81) - line: 24[0m
+[38;5;183m2023-12-10 20:20:08,379 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:20:08,427 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:20:08,497 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:21:57,576 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 5b142806-1070-4e33-b622-05f0e8c499a0) - line: 24[0m
+[38;5;183m2023-12-10 20:21:57,788 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:21:57,829 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:21:57,881 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:25:26,170 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: cb33b25c-14a0-4355-a589-8098160a3657) - line: 24[0m
+[38;5;183m2023-12-10 20:25:26,508 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:25:26,632 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:25:26,695 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:29:04,962 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: d572dd5b-ee14-4a50-9d59-88881652abec) - line: 24[0m
+[38;5;183m2023-12-10 20:29:05,340 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:29:05,388 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:29:05,420 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:33:37,802 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 02427483-29ad-4d9c-8368-c452998e59c5) - line: 24[0m
+[38;5;183m2023-12-10 20:33:38,141 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:33:38,180 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:33:38,215 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:33:38,279 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, 1, 'Speedy Express', '(503) 555-9831')) - line: 93[0m
+[38;5;183m2023-12-10 20:33:38,279 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, 2, 'United Package', '(503) 555-3199')) - line: 93[0m
+[38;5;183m2023-12-10 20:33:38,280 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('INSERT', None, None, None, 3, 'Federal Shipping', '(503) 555-9931')) - line: 93[0m
+[38;5;183m2023-12-10 20:33:38,280 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 20:33:38,281 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 67[0m
+[38;5;183m2023-12-10 21:02:10,302 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 7df5a8dd-68cf-42c2-a423-ac7e23d73b96) - line: 24[0m
+[38;5;183m2023-12-10 21:02:10,753 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:02:10,802 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:02:10,858 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:02:10,898 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:03:16,515 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 8276586b-5a3c-419d-918b-456eddf11cd0) - line: 24[0m
+[38;5;183m2023-12-10 21:03:16,649 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:03:16,683 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:03:16,716 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:03:16,738 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:06:53,789 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: becd24ce-51ba-4425-92be-ff39fbc7df0b) - line: 24[0m
+[38;5;183m2023-12-10 21:06:54,172 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:06:54,209 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:06:54,258 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:06:54,289 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:21:13,875 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 4d7c231f-1582-4d30-b584-57de1c3c01f5) - line: 24[0m
+[38;5;183m2023-12-10 21:21:14,146 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:21:14,191 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:21:14,251 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:21:14,274 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:24:11,208 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: f490a900-c485-44a3-b16e-b707a1893ad7) - line: 24[0m
+[38;5;183m2023-12-10 21:24:11,538 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:24:11,579 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:24:11,614 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:24:11,632 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:27:59,928 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 6a35e817-8c15-4025-9ca7-65aa28cf7a95) - line: 24[0m
+[38;5;183m2023-12-10 21:28:00,228 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:28:00,281 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:28:00,344 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:28:00,391 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:30:27,105 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 3a68de9d-2deb-4960-9a6e-649e59451ac2) - line: 24[0m
+[38;5;183m2023-12-10 21:30:27,337 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:30:27,378 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:30:27,416 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:30:27,431 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:34:53,420 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 228cefa3-e995-4b16-b738-a9cdb15c72d9) - line: 24[0m
+[38;5;183m2023-12-10 21:34:53,832 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:34:53,882 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:34:53,938 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:34:53,967 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:36:20,477 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 79187a82-ff91-4e1c-834a-9718c9549f7d) - line: 24[0m
+[38;5;183m2023-12-10 21:36:20,696 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:36:20,762 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:36:20,867 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:36:20,906 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:38:15,839 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 7b10ef7e-a02d-4bfc-947b-a927fa2d8ec9) - line: 24[0m
+[38;5;183m2023-12-10 21:38:15,998 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:38:16,026 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:38:16,076 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:38:16,102 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:45:20,633 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 43498502-9f1d-4586-ae0b-4134e4925b38) - line: 24[0m
+[38;5;183m2023-12-10 21:45:20,988 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:45:21,045 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:45:21,105 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:45:21,132 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:46:26,565 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: f89b93ff-a014-4efe-a1bb-c76b2561e6fd) - line: 24[0m
+[38;5;183m2023-12-10 21:46:26,709 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:46:26,743 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:46:26,779 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:46:26,800 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:11,213 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 31551b85-13cb-4ee8-bfe5-2ba69eaef2d6) - line: 24[0m
+[38;5;183m2023-12-10 21:49:11,584 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:11,636 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:12,153 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:12,179 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:29,652 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 63c80809-8618-4a18-817e-d74c1cea3557) - line: 24[0m
+[38;5;183m2023-12-10 21:49:29,844 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:29,881 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:29,925 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:49:29,946 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 21:55:51,866 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 9772222c-193c-4ef7-897b-1dee0a59ad45) - line: 24[0m
+[38;5;183m2023-12-10 21:55:52,191 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 99[0m
+[38;5;183m2023-12-10 21:55:52,234 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 99[0m
+[38;5;183m2023-12-10 21:55:52,284 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 99[0m
+[38;5;183m2023-12-10 21:55:52,315 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 99[0m
+[38;5;183m2023-12-10 21:57:40,017 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 52ae43a0-4ef3-43c2-a3c7-bd1ec00a968e) - line: 24[0m
+[38;5;183m2023-12-10 21:57:40,181 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 21:57:40,232 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 21:57:40,268 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 21:57:40,290 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 102[0m
+[31;20m2023-12-10 21:57:40,350 - pipeline_dimensional_data.tasks - update_dim_table - ERROR - (Error fetching results: No results.  Previous SQL was not a query.) - line: 96[0m
+[38;5;183m2023-12-10 21:57:40,351 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 21:57:40,353 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 68[0m
+[38;5;183m2023-12-10 23:14:51,366 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 0a16b773-99b3-429d-85cf-9cdf979bc378) - line: 24[0m
+[38;5;183m2023-12-10 23:14:51,581 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 23:14:51,611 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 23:14:51,647 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 23:14:51,669 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 102[0m
+[31;20m2023-12-10 23:14:51,689 - pipeline_dimensional_data.tasks - update_dim_table - ERROR - (Error fetching results: No results.  Previous SQL was not a query.) - line: 96[0m
+[38;5;183m2023-12-10 23:14:51,699 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 102[0m
+[38;5;183m2023-12-10 23:14:51,700 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 68[0m
+[38;5;183m2023-12-10 23:16:37,165 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 0f7907eb-1b27-4ead-92ae-795ff4264a95) - line: 24[0m
+[38;5;183m2023-12-10 23:16:37,267 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:16:37,289 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:16:37,309 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:16:37,322 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,204 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: d4f55c63-e11e-45e2-8b3e-282d0263eddb) - line: 24[0m
+[38;5;183m2023-12-10 23:23:06,396 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,416 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,434 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,447 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,471 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 'Obere Str. 57', 'Berlin', None, '12209', 'Germany', '030-0074321', '030-0076545', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,471 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner', 'Avda. de la Constitución 2222', 'México D.F.', None, '05021', 'Mexico', '(5) 555-4729', '(5) 555-3745', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,471 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ANTON', 'Antonio Moreno Taquería', 'Antonio Moreno', 'Owner', 'Mataderos  2312', 'México D.F.', None, '05023', 'Mexico', '(5) 555-3932', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('AROUT', 'Around the Horn', 'Thomas Hardy', 'Sales Representative', '120 Hanover Sq.', 'London', None, 'WA1 1DP', 'UK', '(171) 555-7788', '(171) 555-6750', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BERGS', 'Berglunds snabbköp', 'Christina Berglund', 'Order Administrator', 'Berguvsvägen  8', 'Luleå', None, 'S-958 22', 'Sweden', '0921-12 34 65', '0921-12 34 67', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BLAUS', 'Blauer See Delikatessen', 'Hanna Moos', 'Sales Representative', 'Forsterstr. 57', 'Mannheim', None, '68306', 'Germany', '0621-08460', '0621-08924', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BLONP', 'Blondesddsl père et fils', 'Frédérique Citeaux', 'Marketing Manager', '24, place Kléber', 'Strasbourg', None, '67000', 'France', '88.60.15.31', '88.60.15.32', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BOLID', 'Bólido Comidas preparadas', 'Martín Sommer', 'Owner', 'C/ Araquil, 67', 'Madrid', None, '28023', 'Spain', '(91) 555 22 82', '(91) 555 91 99', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BONAP', "Bon app'", 'Laurence Lebihan', 'Owner', '12, rue des Bouchers', 'Marseille', None, '13008', 'France', '91.24.45.40', '91.24.45.41', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BOTTM', 'Bottom-Dollar Markets', 'Elizabeth Lincoln', 'Accounting Manager', '23 Tsawassen Blvd.', 'Tsawassen', 'BC', 'T2F 8M4', 'Canada', '(604) 555-4729', '(604) 555-3745', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('BSBEV', "B's Beverages", 'Victoria Ashworth', 'Sales Representative', 'Fauntleroy Circus', 'London', None, 'EC2 5NT', 'UK', '(171) 555-1212', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('CACTU', 'Cactus Comidas para llevar', 'Patricio Simpson', 'Sales Agent', 'Cerrito 333', 'Buenos Aires', None, '1010', 'Argentina', '(1) 135-5555', '(1) 135-4892', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('CENTC', 'Centro comercial Moctezuma', 'Francisco Chang', 'Marketing Manager', 'Sierras de Granada 9993', 'México D.F.', None, '05022', 'Mexico', '(5) 555-3392', '(5) 555-7293', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('CHOPS', 'Chop-suey Chinese', 'Yang Wang', 'Owner', 'Hauptstr. 29', 'Bern', None, '3012', 'Switzerland', '0452-076545', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('COMMI', 'Comércio Mineiro', 'Pedro Afonso', 'Sales Associate', 'Av. dos Lusíadas, 23', 'Sao Paulo', 'SP', '05432-043', 'Brazil', '(11) 555-7647', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('CONSH', 'Consolidated Holdings', 'Elizabeth Brown', 'Sales Representative', 'Berkeley Gardens 12  Brewery', 'London', None, 'WX1 6LT', 'UK', '(171) 555-2282', '(171) 555-9199', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('DRACD', 'Drachenblut Delikatessen', 'Sven Ottlieb', 'Order Administrator', 'Walserweg 21', 'Aachen', None, '52066', 'Germany', '0241-039123', '0241-059428', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('DUMON', 'Du monde entier', 'Janine Labrune', 'Owner', '67, rue des Cinquante Otages', 'Nantes', None, '44000', 'France', '40.67.88.88', '40.67.89.89', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('EASTC', 'Eastern Connection', 'Ann Devon', 'Sales Agent', '35 King George', 'London', None, 'WX3 6FW', 'UK', '(171) 555-0297', '(171) 555-3373', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ERNSH', 'Ernst Handel', 'Roland Mendel', 'Sales Manager', 'Kirchgasse 6', 'Graz', None, '8010', 'Austria', '7675-3425', '7675-3426', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FAMIA', 'Familia Arquibaldo', 'Aria Cruz', 'Marketing Assistant', 'Rua Orós, 92', 'Sao Paulo', 'SP', '05442-030', 'Brazil', '(11) 555-9857', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FISSA', 'FISSA Fabrica Inter. Salchichas S.A.', 'Diego Roel', 'Accounting Manager', 'C/ Moralzarzal, 86', 'Madrid', None, '28034', 'Spain', '(91) 555 94 44', '(91) 555 55 93', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FOLIG', 'Folies gourmandes', 'Martine Rancé', 'Assistant Sales Agent', '184, chaussée de Tournai', 'Lille', None, '59000', 'France', '20.16.10.16', '20.16.10.17', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FOLKO', 'Folk och fä HB', 'Maria Larsson', 'Owner', 'Åkergatan 24', 'Bräcke', None, 'S-844 67', 'Sweden', '0695-34 67 21', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FRANK', 'Frankenversand', 'Peter Franken', 'Marketing Manager', 'Berliner Platz 43', 'München', None, '80805', 'Germany', '089-0877310', '089-0877451', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FRANR', 'France restauration', 'Carine Schmitt', 'Marketing Manager', '54, rue Royale', 'Nantes', None, '44000', 'France', '40.32.21.21', '40.32.21.20', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,473 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FRANS', 'Franchi S.p.A.', 'Paolo Accorti', 'Sales Representative', 'Via Monte Bianco 34', 'Torino', None, '10100', 'Italy', '011-4988260', '011-4988261', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('FURIB', 'Furia Bacalhau e Frutos do Mar', 'Lino Rodriguez', 'Sales Manager', 'Jardim das rosas n. 32', 'Lisboa', None, '1675', 'Portugal', '(1) 354-2534', '(1) 354-2535', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('GALED', 'Galería del gastrónomo', 'Eduardo Saavedra', 'Marketing Manager', 'Rambla de Cataluña, 23', 'Barcelona', None, '08022', 'Spain', '(93) 203 4560', '(93) 203 4561', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('GODOS', 'Godos Cocina Típica', 'José Pedro Freyre', 'Sales Manager', 'C/ Romero, 33', 'Sevilla', None, '41101', 'Spain', '(95) 555 82 82', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('GOURL', 'Gourmet Lanchonetes', 'André Fonseca', 'Sales Associate', 'Av. Brasil, 442', 'Campinas', 'SP', '04876-786', 'Brazil', '(11) 555-9482', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('GREAL', 'Great Lakes Food Market', 'Howard Snyder', 'Marketing Manager', '2732 Baker Blvd.', 'Eugene', 'OR', '97403', 'USA', '(503) 555-7555', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('GROSR', 'GROSELLA-Restaurante', 'Manuel Pereira', 'Owner', '5ª Ave. Los Palos Grandes', 'Caracas', 'DF', '1081', 'Venezuela', '(2) 283-2951', '(2) 283-3397', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('HANAR', 'Hanari Carnes', 'Mario Pontes', 'Accounting Manager', 'Rua do Paço, 67', 'Rio de Janeiro', 'RJ', '05454-876', 'Brazil', '(21) 555-0091', '(21) 555-8765', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('HILAA', 'HILARION-Abastos', 'Carlos Hernández', 'Sales Representative', 'Carrera 22 con Ave. Carlos Soublette #8-35', 'San Cristóbal', 'Táchira', '5022', 'Venezuela', '(5) 555-1340', '(5) 555-1948', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('HUNGC', 'Hungry Coyote Import Store', 'Yoshi Latimer', 'Sales Representative', 'City Center Plaza 516 Main St.', 'Elgin', 'OR', '97827', 'USA', '(503) 555-6874', '(503) 555-2376', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('HUNGO', 'Hungry Owl All-Night Grocers', 'Patricia McKenna', 'Sales Associate', '8 Johnstown Road', 'Cork', 'Co. Cork', None, 'Ireland', '2967 542', '2967 3333', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ISLAT', 'Island Trading', 'Helen Bennett', 'Marketing Manager', 'Garden House Crowther Way', 'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK', '(198) 555-8888', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('KOENE', 'Königlich Essen', 'Philip Cramer', 'Sales Associate', 'Maubelstr. 90', 'Brandenburg', None, '14776', 'Germany', '0555-09876', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LACOR', "La corne d'abondance", 'Daniel Tonini', 'Sales Representative', "67, avenue de l'Europe", 'Versailles', None, '78000', 'France', '30.59.84.10', '30.59.85.11', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,474 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LAMAI', "La maison d'Asie", 'Annette Roulet', 'Sales Manager', '1 rue Alsace-Lorraine', 'Toulouse', None, '31000', 'France', '61.77.61.10', '61.77.61.11', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LAUGB', 'Laughing Bacchus Wine Cellars', 'Yoshi Tannamuri', 'Marketing Assistant', '1900 Oak St.', 'Vancouver', 'BC', 'V3F 2K1', 'Canada', '(604) 555-3392', '(604) 555-7293', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LAZYK', 'Lazy K Kountry Store', 'John Steel', 'Marketing Manager', '12 Orchestra Terrace', 'Walla Walla', 'WA', '99362', 'USA', '(509) 555-7969', '(509) 555-6221', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LEHMS', 'Lehmanns Marktstand', 'Renate Messner', 'Sales Representative', 'Magazinweg 7', 'Frankfurt a.M.', None, '60528', 'Germany', '069-0245984', '069-0245874', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LETSS', "Let's Stop N Shop", 'Jaime Yorres', 'Owner', '87 Polk St. Suite 5', 'San Francisco', 'CA', '94117', 'USA', '(415) 555-5938', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LILAS', 'LILA-Supermercado', 'Carlos González', 'Accounting Manager', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 'Barquisimeto', 'Lara', '3508', 'Venezuela', '(9) 331-6954', '(9) 331-7256', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LINOD', 'LINO-Delicateses', 'Felipe Izquierdo', 'Owner', 'Ave. 5 de Mayo Porlamar', 'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela', '(8) 34-56-12', '(8) 34-93-93', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('LONEP', 'Lonesome Pine Restaurant', 'Fran Wilson', 'Sales Manager', '89 Chiaroscuro Rd.', 'Portland', 'OR', '97219', 'USA', '(503) 555-9573', '(503) 555-9646', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('MAGAA', 'Magazzini Alimentari Riuniti', 'Giovanni Rovelli', 'Marketing Manager', 'Via Ludovico il Moro 22', 'Bergamo', None, '24100', 'Italy', '035-640230', '035-640231', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('MAISD', 'Maison Dewey', 'Catherine Dewey', 'Sales Agent', 'Rue Joseph-Bens 532', 'Bruxelles', None, 'B-1180', 'Belgium', '(02) 201 24 67', '(02) 201 24 68', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,475 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('MEREP', 'Mère Paillarde', 'Jean Fresnière', 'Marketing Assistant', '43 rue St. Laurent', 'Montréal', 'Québec', 'H1J 1C3', 'Canada', '(514) 555-8054', '(514) 555-8055', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('MORGK', 'Morgenstern Gesundkost', 'Alexander Feuer', 'Marketing Assistant', 'Heerstr. 22', 'Leipzig', None, '04179', 'Germany', '0342-023176', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('NORTS', 'North/South', 'Simon Crowther', 'Sales Associate', 'South House 300 Queensbridge', 'London', None, 'SW7 1RZ', 'UK', '(171) 555-7733', '(171) 555-2530', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('OCEAN', 'Océano Atlántico Ltda.', 'Yvonne Moncada', 'Sales Agent', 'Ing. Gustavo Moncada 8585 Piso 20-A', 'Buenos Aires', None, '1010', 'Argentina', '(1) 135-5333', '(1) 135-5535', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('OLDWO', 'Old World Delicatessen', 'Rene Phillips', 'Sales Representative', '2743 Bering St.', 'Anchorage', 'AK', '99508', 'USA', '(907) 555-7584', '(907) 555-2880', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('OTTIK', 'Ottilies Käseladen', 'Henriette Pfalzheim', 'Owner', 'Mehrheimerstr. 369', 'Köln', None, '50739', 'Germany', '0221-0644327', '0221-0765721', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('PARIS', 'Paris spécialités', 'Marie Bertrand', 'Owner', '265, boulevard Charonne', 'Paris', None, '75012', 'France', '(1) 42.34.22.66', '(1) 42.34.22.77', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('PERIC', 'Pericles Comidas clásicas', 'Guillermo Fernández', 'Sales Representative', 'Calle Dr. Jorge Cash 321', 'México D.F.', None, '05033', 'Mexico', '(5) 552-3745', '(5) 545-3745', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('PICCO', 'Piccolo und mehr', 'Georg Pipps', 'Sales Manager', 'Geislweg 14', 'Salzburg', None, '5020', 'Austria', '6562-9722', '6562-9723', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,476 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('PRINI', 'Princesa Isabel Vinhos', 'Isabel de Castro', 'Sales Representative', 'Estrada da saúde n. 58', 'Lisboa', None, '1756', 'Portugal', '(1) 356-5634', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,477 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('QUEDE', 'Que Delícia', 'Bernardo Batista', 'Accounting Manager', 'Rua da Panificadora, 12', 'Rio de Janeiro', 'RJ', '02389-673', 'Brazil', '(21) 555-4252', '(21) 555-4545', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,477 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('QUEEN', 'Queen Cozinha', 'Lúcia Carvalho', 'Marketing Assistant', 'Alameda dos Canàrios, 891', 'Sao Paulo', 'SP', '05487-020', 'Brazil', '(11) 555-1189', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,477 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('QUICK', 'QUICK-Stop', 'Horst Kloss', 'Accounting Manager', 'Taucherstraße 10', 'Cunewalde', None, '01307', 'Germany', '0372-035188', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,477 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('RANCH', 'Rancho grande', 'Sergio Gutiérrez', 'Sales Representative', 'Av. del Libertador 900', 'Buenos Aires', None, '1010', 'Argentina', '(1) 123-5555', '(1) 123-5556', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,477 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('RATTC', 'Rattlesnake Canyon Grocery', 'Paula Wilson', 'Assistant Sales Representative', '2817 Milton Dr.', 'Albuquerque', 'NM', '87110', 'USA', '(505) 555-5939', '(505) 555-3620', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,478 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('REGGC', 'Reggiani Caseifici', 'Maurizio Moroni', 'Sales Associate', 'Strada Provinciale 124', 'Reggio Emilia', None, '42100', 'Italy', '0522-556721', '0522-556722', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,478 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('RICAR', 'Ricardo Adocicados', 'Janete Limeira', 'Assistant Sales Agent', 'Av. Copacabana, 267', 'Rio de Janeiro', 'RJ', '02389-890', 'Brazil', '(21) 555-3412', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,478 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('RICSU', 'Richter Supermarkt', 'Michael Holz', 'Sales Manager', 'Grenzacherweg 237', 'Genève', None, '1203', 'Switzerland', '0897-034214', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,478 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('ROMEY', 'Romero y tomillo', 'Alejandra Camino', 'Accounting Manager', 'Gran Vía, 1', 'Madrid', None, '28001', 'Spain', '(91) 745 6200', '(91) 745 6210', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,478 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SANTG', 'Santé Gourmet', 'Jonas Bergulfsen', 'Owner', 'Erling Skakkes gate 78', 'Stavern', None, '4110', 'Norway', '07-98 92 35', '07-98 92 47', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SAVEA', 'Save-a-lot Markets', 'Jose Pavarotti', 'Sales Representative', '187 Suffolk Ln.', 'Boise', 'ID', '83720', 'USA', '(208) 555-8097', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SEVES', 'Seven Seas Imports', 'Hari Kumar', 'Sales Manager', '90 Wadhurst Rd.', 'London', None, 'OX15 4NB', 'UK', '(171) 555-1717', '(171) 555-5646', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SIMOB', 'Simons bistro', 'Jytte Petersen', 'Owner', 'Vinbæltet 34', 'Kobenhavn', None, '1734', 'Denmark', '31 12 34 56', '31 13 35 57', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SPECD', 'Spécialités du monde', 'Dominique Perrier', 'Marketing Manager', '25, rue Lauriston', 'Paris', None, '75016', 'France', '(1) 47.55.60.10', '(1) 47.55.60.20', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SPLIR', 'Split Rail Beer & Ale', 'Art Braunschweiger', 'Sales Manager', 'P.O. Box 555', 'Lander', 'WY', '82520', 'USA', '(307) 555-4680', '(307) 555-6525', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('SUPRD', 'Suprêmes délices', 'Pascale Cartrain', 'Accounting Manager', 'Boulevard Tirou, 255', 'Charleroi', None, 'B-6000', 'Belgium', '(071) 23 67 22 20', '(071) 23 67 22 21', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('THEBI', 'The Big Cheese', 'Liz Nixon', 'Marketing Manager', '89 Jefferson Way Suite 2', 'Portland', 'OR', '97201', 'USA', '(503) 555-3612', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('THECR', 'The Cracker Box', 'Liu Wong', 'Marketing Assistant', '55 Grizzly Peak Rd.', 'Butte', 'MT', '59801', 'USA', '(406) 555-5834', '(406) 555-8083', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('TOMSP', 'Toms Spezialitäten', 'Karin Josephs', 'Marketing Manager', 'Luisenstr. 48', 'Münster', None, '44087', 'Germany', '0251-031259', '0251-035695', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('TORTU', 'Tortuga Restaurante', 'Miguel Angel Paolino', 'Owner', 'Avda. Azteca 123', 'México D.F.', None, '05033', 'Mexico', '(5) 555-2933', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('TRADH', 'Tradição Hipermercados', 'Anabela Domingues', 'Sales Representative', 'Av. Inês de Castro, 414', 'Sao Paulo', 'SP', '05634-030', 'Brazil', '(11) 555-2167', '(11) 555-2168', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,479 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('TRAIH', "Trail's Head Gourmet Provisioners", 'Helvetius Nagy', 'Sales Associate', '722 DaVinci Blvd.', 'Kirkland', 'WA', '98034', 'USA', '(206) 555-8257', '(206) 555-2174', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('VAFFE', 'Vaffeljernet', 'Palle Ibsen', 'Sales Manager', 'Smagsloget 45', 'Århus', None, '8200', 'Denmark', '86 21 32 43', '86 22 33 44', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('VICTE', 'Victuailles en stock', 'Mary Saveley', 'Sales Agent', '2, rue du Commerce', 'Lyon', None, '69004', 'France', '78.32.54.86', '78.32.54.87', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('VINET', 'Vins et alcools Chevalier', 'Paul Henriot', 'Accounting Manager', "59 rue de l'Abbaye", 'Reims', None, '51100', 'France', '26.47.15.10', '26.47.15.11', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WANDK', 'Die Wandernde Kuh', 'Rita Müller', 'Sales Representative', 'Adenauerallee 900', 'Stuttgart', None, '70563', 'Germany', '0711-020361', '0711-035428', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WARTH', 'Wartian Herkku', 'Pirkko Koskitalo', 'Accounting Manager', 'Torikatu 38', 'Oulu', None, '90110', 'Finland', '981-443655', '981-443655', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WELLI', 'Wellington Importadora', 'Paula Parente', 'Sales Manager', 'Rua do Mercado, 12', 'Resende', 'SP', '08737-363', 'Brazil', '(14) 555-8122', None, 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WHITC', 'White Clover Markets', 'Karl Jablonski', 'Owner', '305 - 14th Ave. S. Suite 3B', 'Seattle', 'WA', '98128', 'USA', '(206) 555-4112', '(206) 555-4115', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WILMK', 'Wilman Kala', 'Matti Karttunen', 'Owner/Marketing Assistant', 'Keskuskatu 45', 'Helsinki', None, '21240', 'Finland', '90-224 8858', '90-224 8858', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,480 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (Changed Row: ('WOLZA', 'Wolski  Zajazd', 'Zbyszek Piestrzeniewicz', 'Owner', 'ul. Filtrowa 68', 'Warszawa', None, '01-012', 'Poland', '(26) 642-7012', '(26) 642-7012', 'INSERT')) - line: 92[0m
+[38;5;183m2023-12-10 23:23:06,481 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 96[0m
+[38;5;183m2023-12-10 23:23:06,481 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 68[0m
+[38;5;183m2023-12-10 23:32:52,537 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 4f94ada9-9e17-427a-be55-d00a8489d65e) - line: 24[0m
+[38;5;183m2023-12-10 23:32:52,755 - pipeline_dimensional_data.tasks - create_table - INFO - (The dbo.dim_region_scd1 table from the database ORDERS_DIMENSIONAL_DB has been created) - line: 58[0m
+[38;5;183m2023-12-10 23:32:52,779 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 23:32:52,812 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 23:32:52,836 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 23:32:52,848 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 23:32:52,895 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-10 23:32:52,895 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 68[0m
+[38;5;183m2023-12-11 00:36:18,604 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 3cacdec9-f271-4ace-a4ac-724c2ece385c) - line: 24[0m
+[38;5;183m2023-12-11 00:37:42,595 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 355fb052-b6cc-45ec-94b1-2c7b23f4ddc7) - line: 24[0m
+[38;5;183m2023-12-11 00:39:22,784 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:39:22,809 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:39:47,852 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:40:12,888 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:40:37,947 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:43:48,272 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 14a4feb4-e769-4221-984c-7727a45c162b) - line: 24[0m
+[38;5;183m2023-12-11 00:43:48,402 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:43:48,421 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:43:48,440 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:43:48,451 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:43:48,490 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:27,961 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 4c2a8621-0fc3-42e3-a53d-ad46e3bcd93d) - line: 24[0m
+[38;5;183m2023-12-11 00:44:28,009 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:28,011 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:28,016 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:28,018 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:28,021 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 00:44:28,036 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (The dimension table dim_region_scd1 has been updated.) - line: 116[0m
+[38;5;183m2023-12-11 00:44:28,036 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 68[0m
+[38;5;183m2023-12-11 01:05:34,786 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 9e0b87f7-6362-4e57-a84c-de027fbed9cb) - line: 24[0m
+[38;5;183m2023-12-11 01:06:53,710 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: a27a63f7-a207-4790-866d-6015d917ad14) - line: 24[0m
+[38;5;183m2023-12-11 01:07:43,982 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: bd7f4760-31b7-47cd-aa1e-c67dc9288e89) - line: 24[0m
+[38;5;183m2023-12-11 01:09:24,185 - pipeline_dimensional_data.tasks - create_table - INFO - (The dbo.dim_territories_scd1 table from the database ORDERS_DIMENSIONAL_DB has been created) - line: 58[0m
+[38;5;183m2023-12-11 01:09:24,307 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:09:24,401 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:09:49,464 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:20,893 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: d9ce1215-717f-4ffa-b660-fb5951071ca8) - line: 24[0m
+[38;5;183m2023-12-11 01:36:21,355 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:21,472 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:21,566 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:21,603 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:21,679 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:36:21,723 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (The dimension tables dim_region_scd1 and dim_region_scd4_history  have been updated.) - line: 115[0m
+[38;5;183m2023-12-11 01:40:46,765 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 63e575ea-b179-4a04-b8b1-9582e9405d96) - line: 24[0m
+[38;5;183m2023-12-11 01:40:47,172 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:40:47,238 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:40:47,323 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:40:47,349 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:40:47,396 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:40:47,428 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (The dimension tables dim_region_scd1 and dim_region_scd4_history  have been updated.) - line: 115[0m
+[38;5;183m2023-12-11 01:41:12,129 - pipeline_dimensional_data.flow - __init__ - INFO - (DimensionalDataFlow instance created with UUID: 67460a36-a93a-460a-a57e-aee1de8c4fe8) - line: 24[0m
+[38;5;183m2023-12-11 01:41:12,363 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_categories_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:41:12,424 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_suppliers_scd3 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:41:12,495 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_products_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:41:12,529 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_shippers_scd1 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:41:12,599 - pipeline_dimensional_data.tasks - update_dim_table - INFO - (The dimension table dim_customers_scd2 has been updated.) - line: 97[0m
+[38;5;183m2023-12-11 01:41:12,646 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (The dimension tables dim_region_scd1 and dim_region_scd4_history  have been updated.) - line: 115[0m
+[38;5;183m2023-12-11 01:41:12,703 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 1581, 'Westboro', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,704 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 1730, 'Bedford', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,704 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 1833, 'Georgetow', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,704 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 2116, 'Boston', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,704 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 2139, 'Cambridge', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,705 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 2184, 'Braintree', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,705 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 2903, 'Providence', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,705 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 3049, 'Hollis', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,705 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 3801, 'Portsmouth', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,705 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 6897, 'Wilton', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,706 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 7960, 'Morristown', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,706 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 8837, 'Edison', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,706 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 10019, 'New York', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,706 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 10038, 'New York', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,706 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 11747, 'Mellvile', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,707 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 14450, 'Fairport', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,707 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 19428, 'Philadelphia', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,707 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 19713, 'Neward', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,707 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 20852, 'Rockville', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,707 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 27403, 'Greensboro', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,708 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 27511, 'Cary', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,708 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 29202, 'Columbia', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,708 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 30346, 'Atlanta', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,708 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 31406, 'Savannah', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,708 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 32859, 'Orlando', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,709 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 33607, 'Tampa', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,709 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 40222, 'Louisville', 18, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,709 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 44122, 'Beachwood', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,709 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 45839, 'Findlay', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,710 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 48075, 'Southfield', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,710 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 48084, 'Troy', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,710 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 48304, 'Bloomfield Hills', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,710 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 53404, 'Racine', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,710 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 55113, 'Roseville', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,711 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 55439, 'Minneapolis', 20, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,711 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 60179, 'Hoffman Estates', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,711 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 60601, 'Chicago', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,711 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 72716, 'Bentonville', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,711 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 75234, 'Dallas', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,712 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 78759, 'Austin', 21, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,712 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 80202, 'Denver', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,712 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 80909, 'Colorado Springs', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,712 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 85014, 'Phoenix', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,712 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 85251, 'Scottsdale', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,713 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 90405, 'Santa Monica', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,713 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 94025, 'Menlo Park', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,713 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 94105, 'San Francisco', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,713 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 95008, 'Campbell', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,713 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 95054, 'Santa Clara', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,714 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 95060, 'Santa Cruz', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,714 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 98004, 'Bellevue', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,714 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 98052, 'Redmond', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,714 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (Changed Row: ('INSERT', None, None, None, None, 98104, 'Seattle', 19, datetime.datetime(2023, 12, 11, 1, 41, 12, 680000))) - line: 112[0m
+[38;5;183m2023-12-11 01:41:12,715 - pipeline_dimensional_data.tasks - update_dim_table_scd4 - INFO - (The dimension tables dim_territories_scd1 and dim_territories_scd4_history  have been updated.) - line: 115[0m
+[38;5;183m2023-12-11 01:41:12,716 - pipeline_dimensional_data.flow - exec - INFO - (Dimensional Flow Completed Successfully) - line: 71[0m
