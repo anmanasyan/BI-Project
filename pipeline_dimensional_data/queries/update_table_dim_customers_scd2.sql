@@ -54,7 +54,8 @@ WHEN MATCHED AND IsCurrent = 1 AND
 THEN
     UPDATE
     SET DST.IsCurrent = 0, DST.ValidTo = @Yesterday 
-    OUTPUT SRC.CustomerID, SRC.CompanyName, SRC.ContactName, SRC.ContactTitle, SRC.[Address], SRC.City, SRC.Region, SRC.PostalCode, SRC.Country, SRC.Phone, SRC.Fax, $Action AS MergeAction;
+OUTPUT $Action AS MergeAction, DELETED.CustomerID_NK, DELETED.CompanyName, DELETED.ContactName, DELETED.ContactTitle, DELETED.[Address], DELETED.City, DELETED.Region, DELETED.PostalCode, DELETED.Country, DELETED.Phone, DELETED.Fax,
+INSERTED.CustomerID_NK, INSERTED.CompanyName, INSERTED.ContactName, INSERTED.ContactTitle, INSERTED.[Address], INSERTED.City, INSERTED.Region, INSERTED.PostalCode, INSERTED.Country, INSERTED.Phone, INSERTED.Fax;
 
 -- Insert into the SCD2 table
 INSERT INTO {db_dim}.{schema_dim}.{table_dim} (CustomerID_NK, CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax, ValidFrom, ValidTo, IsCurrent)
