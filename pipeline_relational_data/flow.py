@@ -27,8 +27,7 @@ class RelationalDataFlow:
         # Initiating Connection
         conn_ER = tasks.connect_db_create_cursor("Database1")
         
-        #Deleting tables if they existed
-        
+        #Deleting tables if they exist
         tasks.drop_table(conn_ER, 'orderdetails', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'orders', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_constraint(conn_ER,  'employees', 'ORDERS_RELATIONAL_DB', 'dbo')
@@ -55,6 +54,7 @@ class RelationalDataFlow:
         tasks.create_table(conn_ER, 'territories', 'ORDERS_RELATIONAL_DB', 'dbo')
 
         
+        #Inserting Data
         tasks.insert_into_table(conn_ER, 'categories', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Categories')
         tasks.insert_into_table(conn_ER, 'suppliers', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Suppliers')
         tasks.insert_into_table(conn_ER, 'shippers', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Shippers')

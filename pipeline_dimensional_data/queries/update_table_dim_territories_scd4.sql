@@ -9,12 +9,14 @@ DECLARE  @Territories_SCD4 TABLE
 
 ) 
 
+
 -- Merge statement
 MERGE INTO {db_dim}.{schema_dim}.{table_dim}  AS DST 
 USING (SELECT p.*, b.RegionID_PK_SK FROM
 		 {db_rel}.{schema_rel}.{table_rel} p
-		 LEFT JOIN {db_dim}.{schema_dim}.{dim_region_scd1} b ON p.RegionID = b.RegionID_NK
+		 LEFT JOIN {db_dim}.{schema_dim}.Dim_Region_SCD1 b ON p.RegionID = b.RegionID_NK
 		 ) AS SRC -- source
+
 ON	(SRC.TerritoryID = DST.TerritoryID_NK)
 
 WHEN NOT MATCHED THEN
@@ -25,9 +27,10 @@ VALUES (SRC.TerritoryID, SRC.TerritoryDescription, SRC.RegionID, SRC.RegionID_PK
 
 WHEN MATCHED 
 AND	(
-	 ISNULL(DST.TerritoryDescription,'') <> ISNULL(SRC.TerritoryDescription,'')
-	 OR ISNULL(DST.RegionID_SK,'') <> ISNULL(SRC.RegionID_PK_SK,'') 
-	 OR ISNULL(DST.RegionID,'') <> ISNULL(SRC.RegionID,''))
+	 ISNULL(DST.TerritoryDescription,'') <> ISNULL(SRC.TerritoryDescription,'') OR 
+	 ISNULL(DST.RegionID_SK,'') <> ISNULL(SRC.RegionID_PK_SK,'') OR 
+	 ISNULL(DST.RegionID, '') <> ISNULL(SRC.RegionID,'')
+	 )
 
 THEN UPDATE 
 
@@ -54,6 +57,7 @@ FROM		{db_dim}.{schema_dim}.{table_hist} TP4
 			ON TP4.TerritoryID_NK = TMP.TerritoryID_NK
 
 WHERE		TP4.ValidTo IS NULL
+
 
 
 -- Add latest history records to history table

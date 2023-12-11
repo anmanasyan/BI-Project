@@ -56,8 +56,6 @@ def drop_constraint(cursor,  table_name, db, schema):
     cursor.execute(drop_constraint_script)
     cursor.commit()
     logger.info(f"Foreign Key Constraint dropped from {schema}.{table_name} ")
-    #logger.info("The foreign {schema}.{table_name} table from the database {db} has been dropped".format(db=db, schema=schema,
-      #                                                                                table_name=table_name))
 
 
 def create_table(cursor, table_name, db, schema):

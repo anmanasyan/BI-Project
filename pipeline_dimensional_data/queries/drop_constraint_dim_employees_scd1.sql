@@ -1,0 +1,26 @@
+IF EXISTS (
+    SELECT 1
+    FROM {db}.INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc
+    INNER JOIN {db}.INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS rc ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+    WHERE tc.TABLE_NAME = 'Dim_Employees_SCD1' AND tc.CONSTRAINT_TYPE = 'FOREIGN KEY'
+)
+BEGIN
+    -- Delete the foreign key constraint
+    DECLARE @constraintName NVARCHAR(255);
+
+    SELECT @constraintName = tc.CONSTRAINT_NAME
+    FROM {db}.INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc
+    INNER JOIN {db}.INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS rc ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME
+    WHERE tc.TABLE_NAME = 'Dim_Employees_SCD1' AND tc.CONSTRAINT_TYPE = 'FOREIGN KEY';
+
+    DECLARE @sql NVARCHAR(MAX);
+    SET @sql = 'ALTER TABLE ORDERS_DIMENSIONAL_DB.dbo.Dim_Employees_SCD1 DROP CONSTRAINT ' + @constraintName;
+
+    EXEC sp_executesql @sql;
+    
+    PRINT 'Foreign key constraint has been deleted from table ORDERS_DIMENSIONAL_DB.DBO.Dim_Employees_SCD1';
+END
+ELSE
+BEGIN
+    PRINT 'No foreign key constraint found on the table ORDERS_DIMENSIONAL_DB.DBO.Dim_Employees_SCD1)';
+END;

@@ -77,6 +77,12 @@ def insert_into_table(cursor, table_name, db, schema, source_data, sheet_name):
 
     logger.info(f"{len(df)} rows have been inserted into the {db}.{schema}.{table_name} table")
 
+def drop_constraint(cursor,  table_name, db, schema):
+    drop_constraint_script = load_query('drop_constraint_{}'.format(table_name)).format(db=db, schema=schema)
+    cursor.execute(drop_constraint_script)
+    cursor.commit()
+    logger.info(f"Foreign Key Constraint dropped from {schema}.{table_name} ")
+
 def update_dim_table(cursor, table_dst, db_dst, schema_dst, table_src, db_src, schema_src):
 
     update_table_script = load_query('update_table_{}'.format(table_dst)).format(
@@ -98,6 +104,7 @@ def update_dim_table(cursor, table_dst, db_dst, schema_dst, table_src, db_src, s
 
 def update_dim_table_scd4(cursor, table_dst, table_hist, db_dst, schema_dst, table_src, db_src, schema_src):
     table_dim_scd4 = table_dst[:-1] + '4'
+    
     update_table_script = load_query('update_table_{}'.format(table_dim_scd4)).format(
         db_dim=db_dst, schema_dim=schema_dst, table_dim=table_dst, table_hist = table_hist,
         db_rel=db_src, schema_rel=schema_src, table_rel=table_src)

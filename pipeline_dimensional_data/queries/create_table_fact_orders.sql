@@ -8,7 +8,7 @@ CREATE TABLE {db}.{schema}.Fact_Orders (
     Quantity INT NOT NULL,
     Discount DECIMAL(20,10 ) DEFAULT 0.0,
     CustomerID VARCHAR(5),
-    CustomerID_SK VARCHAR(5),
+    CustomerID_SK INT,
     EmployeeID INT,
     EmployeeID_SK INT,
     OrderDate DATE,

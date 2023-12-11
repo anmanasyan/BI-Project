@@ -26,18 +26,21 @@ class DimensionalDataFlow:
     def exec(self):
         # Initiating Connection
         conn_DIM = tasks.connect_db_create_cursor("Database2")
-    
-        tasks.drop_table(conn_DIM, 'dim_categories_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
-        tasks.drop_table(conn_DIM, 'dim_customers_scd2', 'ORDERS_DIMENSIONAL_DB', 'dbo')
-        tasks.drop_table(conn_DIM, 'dim_employees_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+
+        #Dropping tables if they exist
         tasks.drop_table(conn_DIM, 'fact_orders', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_constraint(conn_DIM,  'dim_employees_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_table(conn_DIM, 'dim_employees_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_table(conn_DIM, 'dim_customers_scd2', 'ORDERS_DIMENSIONAL_DB', 'dbo')
         tasks.drop_table(conn_DIM, 'dim_products_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_table(conn_DIM, 'dim_categories_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_table(conn_DIM, 'dim_territories_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.drop_table(conn_DIM, 'dim_territories_scd4_history', 'ORDERS_DIMENSIONAL_DB', 'dbo')
         tasks.drop_table(conn_DIM, 'dim_region_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
         tasks.drop_table(conn_DIM, 'dim_region_scd4_history', 'ORDERS_DIMENSIONAL_DB', 'dbo')
         tasks.drop_table(conn_DIM, 'dim_shippers_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
         tasks.drop_table(conn_DIM, 'dim_suppliers_scd3', 'ORDERS_DIMENSIONAL_DB', 'dbo')
-        tasks.drop_table(conn_DIM, 'dim_territories_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo')
-        tasks.drop_table(conn_DIM, 'dim_territories_scd4_history', 'ORDERS_DIMENSIONAL_DB', 'dbo')
+
         
 
         # Creating all the tables 
@@ -62,9 +65,10 @@ class DimensionalDataFlow:
         tasks.update_dim_table(conn_DIM, 'dim_employees_scd1', 'ORDERS_DIMENSIONAL_DB', 'dbo','Employees', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.update_dim_table_scd4(conn_DIM, 'dim_region_scd1', 'dim_region_scd4_history', 'ORDERS_DIMENSIONAL_DB', 'dbo','Region', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.update_dim_table_scd4(conn_DIM, 'dim_territories_scd1', 'dim_territories_scd4_history', 'ORDERS_DIMENSIONAL_DB', 'dbo','Territories', 'ORDERS_RELATIONAL_DB', 'dbo')
+        tasks.update_dim_table(conn_DIM, 'fact_orders', 'ORDERS_DIMENSIONAL_DB', 'dbo','Orders', 'ORDERS_RELATIONAL_DB', 'dbo')
 
         # Adding referential integrity
-        #tasks.establish_referential_integrity(conn_DIM,'ORDERS_DIMENSIONAL_DB', 'dbo')
+        tasks.establish_referential_integrity(conn_DIM,'ORDERS_DIMENSIONAL_DB', 'dbo')
 
         conn_DIM.close()
         logger.info("Dimensional Flow Completed Successfully")
