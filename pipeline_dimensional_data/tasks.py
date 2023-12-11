@@ -7,7 +7,7 @@ from logger import CustomFormatter
 import logging
 
 #setting up logging
-log_file_path='C:\\Users\\Anna\\Desktop\\BI\\Group_Project_2\\logs\\logs_dimensional_data_pipeline.txt'
+log_file_path=config.log_loc
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
