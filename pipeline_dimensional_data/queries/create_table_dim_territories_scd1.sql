@@ -3,5 +3,6 @@ CREATE TABLE {db}.{schema}.Dim_Territories_SCD1 (
     TerritoryID_NK INT,
     TerritoryDescription VARCHAR(50) NOT NULL, 
     RegionID INT, 
+    RegionID_SK INT,
     [ValidFrom] [datetime] NULL
 );

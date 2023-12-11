@@ -1,13 +1,21 @@
 -- Create Table: Orders
 CREATE TABLE {db}.{schema}.Fact_Orders (
-    OrderID_SK_PK INT IDENTITY(1, 1) PRIMARY KEY,
+    Order_Product_SK_PK INT IDENTITY(1, 1) PRIMARY KEY,
     OrderID_NK INT,
+    ProductID_NK INT,
+    ProductID_SK INT,
+    UnitPrice DECIMAL(20, 2) NOT NULL,
+    Quantity INT NOT NULL,
+    Discount DECIMAL(20,10 ) DEFAULT 0.0,
     CustomerID VARCHAR(5),
+    CustomerID_SK VARCHAR(5),
     EmployeeID INT,
+    EmployeeID_SK INT,
     OrderDate DATE,
     RequiredDate DATE,
     ShippedDate DATE,
     ShipVia INT,
+    ShipVia_SK INT,
     Freight DECIMAL(10, 2),
     ShipName VARCHAR(255),
     ShipAddress VARCHAR(255),
@@ -15,5 +23,6 @@ CREATE TABLE {db}.{schema}.Fact_Orders (
     ShipRegion VARCHAR(255),
     ShipPostalCode VARCHAR(20),
     ShipCountry VARCHAR(255),
-    TerritoryID INT
+    TerritoryID INT, 
+    TerritoryID_SK INT
 );

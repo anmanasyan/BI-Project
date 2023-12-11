@@ -17,5 +17,6 @@ CREATE TABLE {db}.{schema}.Dim_Employees_SCD1 (
     Extension INT,
     Notes VARCHAR(MAX),
     ReportsTo INT, 
+    ReportsTo_SK INT, 
     PhotoPath VARCHAR(MAX)
 );
