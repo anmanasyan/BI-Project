@@ -26,25 +26,27 @@ class RelationalDataFlow:
     def exec(self):
         # Initiating Connection
         conn_ER = tasks.connect_db_create_cursor("Database1")
-        '''
+        
         #Deleting tables if they existed
-        tasks.drop_table(conn_ER, 'order_details', 'ORDERS_RELATIONAL_DB', 'dbo')
-        tasks.drop_table(conn_ER, 'employees', 'ORDERS_RELATIONAL_DB', 'dbo')
+        
+        tasks.drop_table(conn_ER, 'orderdetails', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'orders', 'ORDERS_RELATIONAL_DB', 'dbo')
+        tasks.drop_constraint(conn_ER,  'employees', 'ORDERS_RELATIONAL_DB', 'dbo')
+        tasks.drop_table(conn_ER, 'employees', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'customers', 'ORDERS_RELATIONAL_DB', 'dbo')
-        tasks.drop_table(conn_ER, 'categories', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'products', 'ORDERS_RELATIONAL_DB', 'dbo')
+        tasks.drop_table(conn_ER, 'categories', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'territories', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'region', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'shippers', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.drop_table(conn_ER, 'suppliers', 'ORDERS_RELATIONAL_DB', 'dbo')
-        '''
+        
         
         # Creating all the tables 
         tasks.create_table(conn_ER, 'categories', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.create_table(conn_ER, 'customers', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.create_table(conn_ER, 'employees', 'ORDERS_RELATIONAL_DB', 'dbo')
-        tasks.create_table(conn_ER, 'order_details', 'ORDERS_RELATIONAL_DB', 'dbo')
+        tasks.create_table(conn_ER, 'orderdetails', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.create_table(conn_ER, 'orders', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.create_table(conn_ER, 'products', 'ORDERS_RELATIONAL_DB', 'dbo')
         tasks.create_table(conn_ER, 'region', 'ORDERS_RELATIONAL_DB', 'dbo')
@@ -62,7 +64,7 @@ class RelationalDataFlow:
         tasks.insert_into_table(conn_ER, 'products', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Products')
         tasks.insert_into_table(conn_ER, 'employees', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Employees')
         tasks.insert_into_table(conn_ER, 'orders', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'Orders')
-        tasks.insert_into_table(conn_ER, 'order_details', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'OrderDetails')
+        tasks.insert_into_table(conn_ER, 'orderdetails', 'ORDERS_RELATIONAL_DB', 'dbo', 'raw_data_source.xlsx', 'OrderDetails')
 
 
         # Adding referential integrity

@@ -1,24 +1,34 @@
-[38;5;183m2023-12-09 15:11:35,066 - pipeline_relational_data.flow - __init__ - INFO - (RelationalDataFlow instance created with UUID: 6afdcc6b-a595-48f8-a30a-767bbd2e04a5) - line: 24[0m
-[38;5;183m2023-12-09 15:11:35,414 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.categories table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,434 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.customers table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,453 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.employees table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,474 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.order_details table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,492 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.orders table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,510 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.products table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,526 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.region table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,543 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.shippers table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,561 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.suppliers table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:35,576 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.territories table from the database ORDERS_RELATIONAL_DB has been created) - line: 58[0m
-[38;5;183m2023-12-09 15:11:36,634 - pipeline_relational_data.tasks - insert_into_table - INFO - (8 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.categories table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:36,831 - pipeline_relational_data.tasks - insert_into_table - INFO - (29 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.suppliers table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:36,933 - pipeline_relational_data.tasks - insert_into_table - INFO - (3 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.shippers table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:37,056 - pipeline_relational_data.tasks - insert_into_table - INFO - (4 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.region table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:37,322 - pipeline_relational_data.tasks - insert_into_table - INFO - (53 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.territories table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:37,950 - pipeline_relational_data.tasks - insert_into_table - INFO - (91 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.customers table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:38,324 - pipeline_relational_data.tasks - insert_into_table - INFO - (77 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.products table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:38,480 - pipeline_relational_data.tasks - insert_into_table - INFO - (9 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.employees table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:41,211 - pipeline_relational_data.tasks - insert_into_table - INFO - (830 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.orders table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:45,437 - pipeline_relational_data.tasks - insert_into_table - INFO - (2155 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.order_details table) - line: 78[0m
-[38;5;183m2023-12-09 15:11:45,624 - pipeline_relational_data.tasks - establish_referential_integrity - INFO - (Referential integrity constraints have been established.) - line: 64[0m
-[38;5;183m2023-12-09 15:11:45,625 - pipeline_relational_data.flow - exec - INFO - (Relational Flow Completed Successfully) - line: 72[0m
-[38;5;183m2023-12-10 16:56:28,355 - pipeline_relational_data.flow - __init__ - INFO - (RelationalDataFlow instance created with UUID: 9fd2362c-dff0-40a6-a624-fdf6b3060066) - line: 24[0m
+[38;5;183m2023-12-11 16:19:49,771 - pipeline_relational_data.flow - __init__ - INFO - (RelationalDataFlow instance created with UUID: 5412570c-ff01-4d2d-a970-96d47b3dbca0) - line: 24[0m
+[38;5;183m2023-12-11 16:19:49,915 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.orderdetails table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:49,928 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.orders table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,404 - pipeline_relational_data.tasks - drop_constraint - INFO - (Foreign Key Constraint dropped from dbo.employees ) - line: 58[0m
+[38;5;183m2023-12-11 16:19:50,409 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.employees table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,416 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.customers table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,425 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.products table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,431 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.categories table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,438 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.territories table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,442 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.region table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,448 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.shippers table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,453 - pipeline_relational_data.tasks - drop_table - INFO - (The dbo.suppliers table from the database ORDERS_RELATIONAL_DB has been dropped) - line: 51[0m
+[38;5;183m2023-12-11 16:19:50,459 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.categories table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,463 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.customers table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,469 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.employees table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,474 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.orderdetails table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,480 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.orders table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,484 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.products table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,489 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.region table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,494 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.shippers table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,500 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.suppliers table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:50,504 - pipeline_relational_data.tasks - create_table - INFO - (The dbo.territories table from the database ORDERS_RELATIONAL_DB has been created) - line: 67[0m
+[38;5;183m2023-12-11 16:19:51,474 - pipeline_relational_data.tasks - insert_into_table - INFO - (8 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.categories table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:51,730 - pipeline_relational_data.tasks - insert_into_table - INFO - (29 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.suppliers table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:51,816 - pipeline_relational_data.tasks - insert_into_table - INFO - (3 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.shippers table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:51,888 - pipeline_relational_data.tasks - insert_into_table - INFO - (4 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.region table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:52,097 - pipeline_relational_data.tasks - insert_into_table - INFO - (53 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.territories table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:52,632 - pipeline_relational_data.tasks - insert_into_table - INFO - (91 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.customers table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:53,117 - pipeline_relational_data.tasks - insert_into_table - INFO - (77 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.products table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:53,313 - pipeline_relational_data.tasks - insert_into_table - INFO - (9 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.employees table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:56,347 - pipeline_relational_data.tasks - insert_into_table - INFO - (830 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.orders table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:59,789 - pipeline_relational_data.tasks - insert_into_table - INFO - (2155 rows have been inserted into the ORDERS_RELATIONAL_DB.dbo.orderdetails table) - line: 87[0m
+[38;5;183m2023-12-11 16:19:59,924 - pipeline_relational_data.tasks - establish_referential_integrity - INFO - (Referential integrity constraints have been established.) - line: 73[0m
+[38;5;183m2023-12-11 16:19:59,924 - pipeline_relational_data.flow - exec - INFO - (Relational Flow Completed Successfully) - line: 74[0m

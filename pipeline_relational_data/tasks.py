@@ -40,7 +40,7 @@ def load_query(query_name):
                 sql_script = script_file.read()
             break
 
-    logger.info("Loaded SQL Script:", sql_script) 
+    #logger.info("Loaded SQL Script: %s", sql_script)
     return sql_script
 
 
@@ -50,6 +50,15 @@ def drop_table(cursor, table_name, db, schema):
     cursor.commit()
     logger.info("The {schema}.{table_name} table from the database {db} has been dropped".format(db=db, schema=schema,
                                                                                        table_name=table_name))
+    
+def drop_constraint(cursor,  table_name, db, schema):
+    drop_constraint_script = load_query('drop_constraint_{}'.format(table_name)).format(db=db, schema=schema)
+    cursor.execute(drop_constraint_script)
+    cursor.commit()
+    logger.info(f"Foreign Key Constraint dropped from {schema}.{table_name} ")
+    #logger.info("The foreign {schema}.{table_name} table from the database {db} has been dropped".format(db=db, schema=schema,
+      #                                                                                table_name=table_name))
+
 
 def create_table(cursor, table_name, db, schema):
     create_table_script = load_query('create_table_{}'.format(table_name)).format(db=db, schema=schema)
@@ -74,7 +83,6 @@ def insert_into_table(cursor, table_name, db, schema, source_data, sheet_name):
         values = [row[col] if pd.notna(row[col]) else None for col in df.columns]
         cursor.execute(insert_into_table_script, *values)
         cursor.commit()
-       #logger.info(f"Inserted Value: {values}")
 
     logger.info(f"{len(df)} rows have been inserted into the {db}.{schema}.{table_name} table")
 
